@@ -9,12 +9,13 @@ import "./App.css";
 
 function App() {
   const initialGrid = {
-    0: { 1: "1", 2: "2", 3: "" },
+    0: { 1: "", 2: "", 3: "" },
     1: { 4: "", 5: "", 6: "" },
     2: { 7: "", 8: "", 9: "" },
   };
   const [open, setOpen] = useState(true);
   const [grid, setGrid] = useState(initialGrid);
+  const [search, setSearch] = useState('');
 
   const handleClose = () => {
     setOpen(false);
@@ -22,9 +23,17 @@ function App() {
 
   const handleInputChange = (event) => {
     const {name, value} = event.target
-    setGrid((prevState) => ({ ...prevState, [Math.ceil(name / 3 - 1)] : {...prevState[Math.ceil(name / 3 - 1)], [name]: value} }));
-
+    console.log('name> ', name)
+    console.log('value> ', value)
+    console.log('grid> ', grid)
+    setGrid((prevState) => ({ ...prevState, [Math.ceil(name / 3 -1)] : {...prevState[Math.ceil(name / 3 -1)], [name]: value} }));
+    console.log('grid after> ', grid)
     }
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value)
+    console.log('search: ', search)
+  }
     return (
       <div>
         <Dialog
@@ -34,20 +43,20 @@ function App() {
         >
 
           <Box className="popUp">
-            <TextField label="Search" className="searchBar"></TextField>
+            <TextField label="Search" className="searchBar" onChange={handleSearch}></TextField>
             <Grid container>
               {Object.values(grid).map((e, i) => (
                 <Grid item className="listItems" fullWidth key={i}>
-                  {Object.keys(e).map((innerElem) => (
-                    <Grid item key={innerElem}>
+                  {/* {Object.values(e).filter(elem => elem.includes(search)).map((innerElem, j) => ( */}
+                  {Object.entries(e).filter(elem => elem[1].includes(search)).map(innerElem => (
+                    <Grid item key={innerElem[0]}>
                       <TextField
-                        value={e.innerElem}
-                        name={innerElem}
+                        value={innerElem[1]}
+                        name={innerElem[0]}
                         onChange={handleInputChange}
                         variant="outlined"
                         className="listItem"
                       >
-
                       </TextField>
                     </Grid>
                   ))}

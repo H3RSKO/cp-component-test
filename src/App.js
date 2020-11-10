@@ -1,34 +1,63 @@
-import React, {useState} from 'react'
-import {DialogTitle, Dialog, List, ListItem} from '@material-ui/core';
-import './App.css';
+import React, { useState, prevState } from "react";
+import {
+  Dialog,
+  TextField,
+  Grid,
+  Box,
+} from "@material-ui/core";
+import "./App.css";
 
 function App() {
-  const initilaGrid = [[{content: '1'},{content: '2'},{content: '3'}],[{content: '4'},{content: '5'},{content: '6'}],[{content: '7'},{content: '8'},{content: '9'}]]
-  const [open, setOpen] = useState(true)
-  const [grid, setGrid] = useState(initilaGrid)
+  const initialGrid = {
+    0: { 1: "1", 2: "2", 3: "" },
+    1: { 4: "", 5: "", 6: "" },
+    2: { 7: "", 8: "", 9: "" },
+  };
+  const [open, setOpen] = useState(true);
+  const [grid, setGrid] = useState(initialGrid);
 
   const handleClose = () => {
-    setOpen(true)
-  }
+    setOpen(false);
+  };
 
   const handleInputChange = (event) => {
-    setGrid({...grid, [event.target.name]: event.target.value})
-  }
+    const {name, value} = event.target
+    setGrid((prevState) => ({ ...prevState, [Math.ceil(name / 3 - 1)] : {...prevState[Math.ceil(name / 3 - 1)], [name]: value} }));
 
-  return (
-    <div>
-    <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-      <DialogTitle id="simple-dialog-title">Grid</DialogTitle>
-      <List className='popUp'>
-        {grid.map((e, i) => (
-           <ListItem text onChange={handleInputChange} key={i}>
-            {e.content}
-          </ListItem>
-        ))}
-      </List>
-    </Dialog>
-    </div>
-  );
-}
+    }
+    return (
+      <div>
+        <Dialog
+          onClose={handleClose}
+          aria-labelledby="simple-dialog-title"
+          open={open}
+        >
+
+          <Box className="popUp">
+            <TextField label="Search" className="searchBar"></TextField>
+            <Grid container>
+              {Object.values(grid).map((e, i) => (
+                <Grid item className="listItems" fullWidth key={i}>
+                  {Object.keys(e).map((innerElem) => (
+                    <Grid item key={innerElem}>
+                      <TextField
+                        value={e.innerElem}
+                        name={innerElem}
+                        onChange={handleInputChange}
+                        variant="outlined"
+                        className="listItem"
+                      >
+
+                      </TextField>
+                    </Grid>
+                  ))}
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </Dialog>
+      </div>
+    );
+  };
 
 export default App;

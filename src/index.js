@@ -4,9 +4,21 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// data is passed in as JSON like this:
+// uncomment to see the data passed in 👇
+// const data = {
+//   "id": "value1",
+//   "id2": "value2",
+//   "id3": "value3",
+//   "id4": "value4"
+// }
+
+// placeholder if we are not passing in data
+const data = {}
+
 ReactDOM.render(
   <div>
-    <App />
+    <App data={data}/>
   </div>,
   document.getElementById('root')
 );

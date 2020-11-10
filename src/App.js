@@ -1,4 +1,4 @@
-import React, { useState, prevState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dialog,
   TextField,
@@ -7,33 +7,54 @@ import {
 } from "@material-ui/core";
 import "./App.css";
 
-function App() {
+// // data is passed in as JSON like:
+// const data = {
+//   "id": "value1",
+//   "id": "value2"
+// }
+
+
+function App(props) {
+  // passed in JSON
+  const {data} = props
+
+  // default data if nothing is passed in
   const initialGrid = {
     0: { 1: "", 2: "", 3: "" },
     1: { 4: "", 5: "", 6: "" },
     2: { 7: "", 8: "", 9: "" },
   };
+
   const [open, setOpen] = useState(true);
   const [grid, setGrid] = useState(initialGrid);
   const [search, setSearch] = useState('');
+
+  // checks to see if data is passed in, If it is it inputs it into our grid
+  useEffect(() => {
+    if (Object.entries(data).length) {
+      let dataArray = Object.values(data)
+      dataArray.forEach((val, i) => {
+        setGrid((prevState) => ({ ...prevState, [Math.ceil((i + 1) / 3 - 1)] : {...prevState[Math.ceil((i + 1) / 3 - 1)], [i + 1]: val} }))
+      })
+    }
+  }, [])
 
   const handleClose = () => {
     setOpen(false);
   };
 
+  // our input handler
   const handleInputChange = (event) => {
     const {name, value} = event.target
-    console.log('name> ', name)
-    console.log('value> ', value)
-    console.log('grid> ', grid)
     setGrid((prevState) => ({ ...prevState, [Math.ceil(name / 3 -1)] : {...prevState[Math.ceil(name / 3 -1)], [name]: value} }));
-    console.log('grid after> ', grid)
     }
 
+  // our search handler
   const handleSearch = (event) => {
     setSearch(event.target.value)
     console.log('search: ', search)
   }
+
     return (
       <div>
         <Dialog
@@ -46,8 +67,7 @@ function App() {
             <TextField label="Search" className="searchBar" onChange={handleSearch}></TextField>
             <Grid container>
               {Object.values(grid).map((e, i) => (
-                <Grid item className="listItems" fullWidth key={i}>
-                  {/* {Object.values(e).filter(elem => elem.includes(search)).map((innerElem, j) => ( */}
+                <Grid item container className="listItems" direction="row" key={i}>
                   {Object.entries(e).filter(elem => elem[1].includes(search)).map(innerElem => (
                     <Grid item key={innerElem[0]}>
                       <TextField

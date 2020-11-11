@@ -13,14 +13,15 @@
   align-items: 'center';
   margin: .5em;
 }
-bit login
+
 .listItems {
-  padding: 0
+  padding: 0;
+  align-items: 'center';
 }
 
 .listItem {
   flex-direction: 'row';
-  flex-shrink: 3;
+  width: 130px;
   padding: 0
 }
 

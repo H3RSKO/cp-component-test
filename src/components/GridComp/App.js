@@ -63,11 +63,13 @@ function GridComp(props) {
           open={open}
         >
 
-          <Box className="popUp">
-            <TextField label="Search" className="searchBar" onChange={handleSearch}></TextField>
-            <Grid container>
+          <Box className="popUp" justify="center"
+                alignItems="center">
+            <TextField label="Search" fullWidth="true" className="searchBar" onChange={handleSearch}></TextField>
+            <Grid container >
               {Object.values(grid).map((e, i) => (
-                <Grid item container className="listItems" direction="row" key={i}>
+                <Grid item container className="listItems" direction="row" key={i} justify="center"
+                alignItems="center">
                   {Object.entries(e).filter(elem => elem[1].includes(search)).map(innerElem => (
                     <Grid item key={innerElem[0]}>
                       <TextField

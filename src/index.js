@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import GridComp from './components/GridComp';
 
-
 // data is passed in as JSON like this:
 // uncomment to see the data passed in 👇
 // const data = {

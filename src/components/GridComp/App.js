@@ -14,7 +14,7 @@ import "./App.css";
 // }
 
 
-function App(props) {
+function GridComp(props) {
   // passed in JSON
   const {data} = props
 
@@ -89,4 +89,4 @@ function App(props) {
     );
   };
 
-export default App;
+export default GridComp;

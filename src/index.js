@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import GridComp from './components/GridComp';
+
 
 // data is passed in as JSON like this:
 // uncomment to see the data passed in 👇
@@ -18,7 +18,7 @@ const data = {}
 
 ReactDOM.render(
   <div>
-    <App data={data}/>
+    <GridComp data={data}/>
   </div>,
   document.getElementById('root')
 );
@@ -26,4 +26,4 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+

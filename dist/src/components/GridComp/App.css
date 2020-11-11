@@ -1,0 +1,30 @@
+.App {
+  text-align: center;
+  padding: 15em;
+}
+
+.searchBar {
+  padding-left: 2em;
+}
+
+.popUp {
+  display: 'flex';
+  flex-direction: 'column';
+  align-items: 'center';
+  margin: .5em;
+}
+bit login
+.listItems {
+  padding: 0
+}
+
+.listItem {
+  flex-direction: 'row';
+  flex-shrink: 3;
+  padding: 0
+}
+
+.MuiOutlinedInput-input {
+  flex-shrink: 3;
+  padding: 0
+}

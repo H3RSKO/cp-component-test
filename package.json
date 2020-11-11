@@ -45,6 +45,16 @@
       "compiler": "bit.envs/compilers/react@1.0.21"
     },
     "componentsDefaultDirectory": "components/{name}",
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "overrides": {
+      "*": {
+        "dependencies": {
+          "react": "-"
+        },
+        "peerDependencies": {
+          "react": "+"
+        }
+      }
+  }
   }
 }
